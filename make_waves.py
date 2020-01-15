@@ -109,11 +109,11 @@ np.savez_compressed(arxiu_out, hs,fp,dir)
 
 toc()
 
-#t=12
-#plt.title('temps = {}'.format(t))
-#plt.pcolor(Xnod,Ynod,hs_rec[:,:,t])
-#plt.clim(0,1.4)
-#plt.colorbar()
+t=45
+plt.title(' python3 temps = {}'.format(t))
+plt.pcolor(Xnod,Ynod,dir_rec[:,:,t])
+plt.clim(0,360)
+plt.colorbar()
 
-#plt.show()
+plt.show()
  
