@@ -46,3 +46,7 @@ def toc():
       print ("Toc: start time not set")
 # diuen que es un invent https://gist.github.com/jeromer/2005586
 
+
+
+   
+   
