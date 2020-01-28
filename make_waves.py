@@ -6,13 +6,17 @@ import matplotlib.pyplot as plt
 tic()
 Tini_trip=11   #Time ini trip from 00:00 respect to waves file (e.g. 0 means that begin at 00:00);
 #FILES WITH WAVE INFORMATION
+#arx_nods='in/nodes.npz'
+#arxiu_out='in/waves_xxx'
+# ########
+arx_nods='in/nodes_sn.npz'
+arxiu_out='in/waves_xsn'
+# ##################
 ARX=['HW-20180228-HC.nc','HW-20180301-HC.nc']
-
-#NAME AND FOLDER FOR INTERPOLATED WAVES (output)
-Na=len(ARX)
-arxiu_out='in/waves_xxxx'
 dir_arx='in/'
-dat = np.load('nodes.npz')
+# ###### fi de zona usuari
+Na=len(ARX)
+dat = np.load(arx_nods)
 nodes=dat['arr_0']
 #inc=dat['arr_1']
 Nx=dat['arr_2']
@@ -110,7 +114,7 @@ np.savez_compressed(arxiu_out, hs,fp,dir)
 toc()
 
 t=45
-plt.title(' python3 temps = {}'.format(t))
+plt.title(' make_waves temps = {}'.format(t))
 plt.pcolor(Xnod,Ynod,dir_rec[:,:,t])
 plt.clim(0,360)
 plt.colorbar()

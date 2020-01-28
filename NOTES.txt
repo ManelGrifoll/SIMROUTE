@@ -1,0 +1,15 @@
+Atencio la diferencia mes gran en matlab i python es que python comença a contar per 0.
+Matlab comença a contar a partir de 1.
+
+Nx continua sent el nombre de nodes es una fila, pero en python el primer node es el 0 i el ultim el Nx-1 en Matlab el primer node es el 1 i l'ultim el Nx
+
+
+Els nodes.dat  ara son nodes.npz  (es pot canviar el nom) estan a in.
+
+El programa load_var.py es veu com es fa, al make_mesh.py es veu com es fa.
+
+Pre trure una linea de costa adaptada als nodes, hem de tenir un arxiu de text
+format dues columnes i NaN NaN per les interrupcions (a in hi ha la de europa:
+lcd_eu_h.dat, l'aplicacio make_lcd.py l'adapta els nodes del projecte i es guarda en una array de dues colunes
+make_sea_ew.py
+te opció per plotejar i per gravar, el sufix es _ew.

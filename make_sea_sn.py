@@ -1,22 +1,22 @@
 # first run de previous and zoom the zone desired to make sea
 # afterwards, run this program.
 #The sequence is from bottom left to top right
-#the result is the start with sufix _ew  (dins de in)
+#the result is the start with sufix _ew  
 import numpy  as np
 import sys
 import matplotlib.pyplot as plt
 from modsim import *
-
-N1=3827
-N2=4807
-arx_in='in/nodes.npz'
-arx_ones='in/waves_xxx.npz'
 gravar=1       # Si voleu fer proves sense grabar poseu 0
+N1=9251
+N2=11945
+arx_in='in/nodes_sn.npz'
+arx_ones='in/waves_xsn.npz'
+ldct='in/ldcTrim_sn.npz'
 ###########
 # representacio
-plotejar=1        #1 es plotejar primer a 0 quan vulguis veure resultats a 1
-vari=3             # 1->hs    2->fp  3-> dir
-t=0             # hora  que caugui dins del domini
+plotejar=1        #1 es plotejar
+vari=3            # 1->hs    2->fp  3-> dir
+t=48            # hora  que caugui dins del domini
 ###############
 dat = np.load(arx_in)
 nodes=dat['arr_0']
@@ -36,7 +36,7 @@ hOld=np.copy(dir)
 fp=dat['arr_1']
 dir=dat['arr_2']
 
-dat=np.load('in/ldcTrim.npz')
+dat=np.load(ldct)
 ldc=dat['arr_0']
 if plotejar==1: 
     if vari==1:
@@ -55,66 +55,74 @@ incY=int(round((nodes[N2,1]-nodes[N1,1])/inc,5))
 hh=hs[:,1]
 n_time=hs.shape[1]
 
-for j in range(incY+1):
-    n=N1+j*Nx
+#Comprobacio qie els N1 i N2 escollits son factibles (sea-sea) 
+for i in range(incX+1):
+    n=N1+i
     
     if np.isnan(hh[n]):
-        print('Mira be els punts de l\'esquerra han de ser tots sea, prova de baixar N1 una unitat')
+        print('Mira be els punts de l\'sota han de ser tots sea, prova de baixar N1 una unitat')
         sys.exit()
-print('Per l\'esquerra be \n')
-for j in range(incY+1):
-    n=N1+incX+j*Nx
+print('Per sota be \n')
+for j in range(incX+1):
+    n=N2-j
     if np.isnan(hh[n]):
-        print('Mira be els punts de la dreta han de ser tots sea, prova de pujar N2 una unitat')
+        print('Mira be els punts de dalt han  ser tots sea, prova de pujar N2 una unitat')
         sys.exit()        
-print('Per la dreta be \n')
-for j in range(incY+1):
-    for i in range(incX+1):           # busca el ultim node i que te valor per l'esquerra 
+print('Per la dreat be \n')
+
+# mira a cada tira vertical els nodes extrem q no son nans a mida que els trobi fara els canvis a valors interpolats
+print("Ara mirem de trobar els ultims nodes no nan")
+for i in range(incX+1):
+    for j in range(incY+1):           # busca el ultim node que te valor per sota(no es NaN) 
         n=N1+i+Nx*j
         if not np.isnan(hh[n]):
-            leftn=n
+            downn=n
         else:
             break
-    for i in range(incX+1):
-            n=N1+incX-i+Nx*j
-            if  not np.isnan(hh[n]):
-                rightn=n
-                break
-            
         
-    ###make hs
-    leftvalue=hs[leftn,:]
-    rigthvalue=hs[rightn,:]
-    nn=(rightn-leftn);
-    xx=(rigthvalue-leftvalue)/nn;
-    ###for t in range(t_time):
-    for t in range(n_time):
-        for i in range(leftn+1,rightn,1):
-            hs[i,t]=hs[i-1,t]+xx[t]
-     ###make fp       
-    leftvalue=fp[leftn,:]
-    rigthvalue=fp[rightn,:]
-    nn=(rightn-leftn);
-    xx=(rigthvalue-leftvalue)/nn;
-    ###for t in range(t_time):
-    for t in range(n_time):
-        for i in range(leftn+1,rightn,1):
-            fp[i,t]=fp[i-1,t]+xx[t]      
-            
-       ###make dir
-    leftvalue=dir[leftn,:]
-    rigthvalue=dir[rightn,:]
+    for j in range(incY+1):
+            n=N1+i+(incY-j)*Nx
+            if  not np.isnan(hh[n]):
+                upn=n
+            else:
+                break
+        
+    ####make hs
     
-    for t in  range(n_time):     
-        dir[leftn+1:rightn,t]=dir2dir(leftvalue[t],rigthvalue[t],rightn-leftn-1)
-        #aquesta funcio esta comentada as modsim.py
-#ara gravarem treiem el 4 ultims caracters i hi posem '_ew'
+    downvalue=hs[downn,:]
+    upvalue=hs[upn,:]
+    nn=(upn-downn)/Nx;
+    xx=(upvalue-downvalue)/nn;
+
+    for t in range(n_time):
+        for k in range(downn+Nx,upn,Nx):
+            hs[k,t]=hs[k-Nx,t]+xx[t]
+     # ###make fp    
+    downvalue=fp[downn,:]
+    upvalue=fp[upn,:]
+    nn=(upn-downn)/Nx;
+    xx=(upvalue-downvalue)/nn;
+    for t in range(n_time):
+        for k in range(downn+Nx,upn,Nx):
+            fp[k,t]=fp[k-Nx,t]+xx[t] 
+   # make dir
+    downvalue=dir[downn,:]
+    upvalue=dir[upn,:]
+    for t in  range(n_time):  
+       # Lafuncio dir2dir opera amb horitzontal , volem els resultats colocats en vertical
+        out=dir2dir(downvalue[t],upvalue[t],int((upn-downn)/Nx)-1) 
+        i=0
+        for k in range(downn+Nx,upn,Nx):
+            dir[k,t]=out[i]
+            i=i+1
+ #ara gravarem treiem el 4 ultims caracters i hi posem '_ew'
 if gravar==1:
-    ar=arx_ones[:-4]+'_ew'
+    ar=arx_ones[:-4]+'_sn'
     np.savez_compressed(ar, hs,fp,dir)
-    print('He gravat')
-if plotejar==1:    #la x,y son els valors limits cel colorbar
+    print('He gravat')            
+            
     
+if plotejar==1:
     if vari==1:
         new=hs[:,t].reshape(sh)
         tit='HS'
@@ -124,13 +132,17 @@ if plotejar==1:    #la x,y son els valors limits cel colorbar
         new=fp[:,t].reshape(sh)
         tit='FP'
         x=0
-        y=14
+        y=6
     if vari==3:
         new=dir[:,t].reshape(sh)
         tit='DIR'
         x=0
         y=360
     
+    
+    
+
+
 
     oo=old[:,t].reshape(sh)
     plt.figure(1)
@@ -138,21 +150,21 @@ if plotejar==1:    #la x,y son els valors limits cel colorbar
     plt.plot(ldc[:,0],ldc[:,1],'-')            
     plt.title('{}  Old temps = {}'.format(tit,t))           
     plt.pcolor(Xnod,Ynod,oo)
-    plt.clim(x,y)
-    plt.colorbar()  
+#    plt.colorbar()  
     plt.subplot(1,2,2)
 
     plt.plot(ldc[:,0],ldc[:,1],'-')            
     plt.title('{} New temps = {}'.format(tit,t))           
     plt.pcolor(Xnod,Ynod,new)
-    plt.clim(x,y)
+  #  plt.clim(x,y)
     plt.colorbar()  
-    
+    plt.plot(nodes[N1,0],nodes[N1,1],'*')
+    plt.plot(nodes[N2,0],nodes[N2,1],'o')
     plt.figure(2)
     plt.plot(ldc[:,0],ldc[:,1],'-')            
     plt.title('{} diff temps = {}'.format(tit,t))           
     plt.pcolor(Xnod,Ynod,new-oo)
-    plt.clim(x,y)
+  #  plt.clim(x,y)
     plt.colorbar()  
     
     plt.show()

@@ -9,15 +9,20 @@ import scipy.interpolate
 import matplotlib.pyplot as plt
 #from pylab import plot, ginput, show, axis
 
-t=45   #  var=1 -> hs
+t=24   #  var=1 -> hs
        #var=2   -< fp
        #var=3   ->   dir
 var=3                  
 x= 0         # del plt.clim(x,y)
 y=360
-
-nodes='nodes.npz'
-waves='in/waves_xxxx.npz'
+nodes='in/nodes_sn.npz'
+waves='in/waves_xsn.npz'
+ldct='in/ldcTrim_sn.npz'
+# #####################
+#nodes='in/nodes.npz'
+#waves='in/waves_xxx.npz'
+#ldc='in/ldcTrim.npz'
+# #################
 dat = np.load(nodes)
 nodes=dat['arr_0']
 inc=dat['arr_1']
@@ -35,7 +40,7 @@ hs=dat['arr_0']
 fp=dat['arr_1']
 dir=dat['arr_2']
 
-dat=np.load('in/ldcTrim.npz')
+dat=np.load(ldct)
 ldc=dat['arr_0']
 ##############
 Xnod, Ynod = np.meshgrid(tira_lon,tira_lat)
@@ -62,14 +67,16 @@ plt.title(' make_plot temps = {}'.format(t))
 plt.pcolor(Xnod,Ynod,hh)
 plt.clim(x,y)
 plt.colorbar()
-P1=[9.1280,41.3018]
-P2=[9.49463,41.3625]
+#P1=[9.1280,41.3018]
+#P2=[9.49463,41.3625]
+P1=[15.5538,37.89]
+P2=[15.685,38.405]
+P2=[nodes[
 plt.plot(P1[0],P1[1],'*')
 plt.plot(P2[0],P2[1],'o')
 inc=inc/60;
-xnod=np.floor((P1[0]-LonMin)/inc);
-
-ynod=np.floor((P1[1]-LatMin)/inc);
+xnod=np.floor((P2[0]-LonMin)/inc);
+ynod=np.floor((P2[1]-LatMin)/inc);
 nnod=int(xnod+Nx*(ynod));
 print('            Nodes Tests   \n')
 print(' ================================================================ \n')

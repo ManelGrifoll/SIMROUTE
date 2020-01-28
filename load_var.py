@@ -1,6 +1,6 @@
 import numpy  as np
 
-dat = np.load('nodes.npz')
+dat = np.load('in/nodes.npz')
 nodes=dat['arr_0']
 inc=dat['arr_1']
 Nx=dat['arr_2']
@@ -16,3 +16,6 @@ dat = np.load('in/waves_xxxx.npz')
 hs=dat['arr_0']
 fp=dat['arr_1']
 dir=dat['arr_2']
+
+dat=np.load('in/ldcTrim.npz')
+ldc=dat['arr_0']
