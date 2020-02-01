@@ -1,30 +1,32 @@
 import numpy  as np
-#nomSim='BcnPlm_12'
-#LonMin=2.0
-#LonMax=10.0
-#LatMin=41.0
-#LatMax=45.0
-#inc=1.5;    #in milles   (minutes of arcmax)
+nomSim='BcnPlm_12'
+LonMin=2.0
+LonMax=10.0
+LatMin=41.0
+LatMax=45.0
+inc=1.5;    #in milles   (minutes of arcmax)
+nodIni=17133
+nodEnd=32798
 #arx='in/nodes.npz'
 # ########################################3
-nomSim='BcnPlm_ns'
-LonMin=14.66
-LonMax=17.83
-LatMin=36.08
-LatMax=39
-inc=1.5;    #in milles   (minutes of arcmax)
+#nomSim='BcnPlm_ns'
+#LonMin=14.66
+#LonMax=17.83
+#LatMin=36.08
+#LatMax=39
+#inc=1.5;    #in milles   (minutes of arcmax)
 #arx='in/nodes_sn.npz'
 # ###################################### Si poses un valor a arxiu ones el carregara
-arx_ones='in/waves_xsn.npz'
-aer_ldc= 'xxxxxx'
+arx_ones= 'in/waves_xxx.npz'
+arx_ldc= 'xxxxxx'
+v0=16.1  # cruising speed in nautical milles per hour (knots)
 # #######################
 if len(arx_ones)>3:
     dat = np.load(arx_ones)
     hs=dat['arr_0']
     fp=dat['arr_1']
-    dir=dat['arr_2']
-    
-
+    dir=dat['arr_2']   
+# posar un ldc per
 # ##############
 inc=inc/60.0    # in deg
 
