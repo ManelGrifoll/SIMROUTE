@@ -2,12 +2,13 @@ Atencio la diferencia mes gran en matlab i python es que python comença a conta
 Matlab comença a contar a partir de 1.
 
 Nx continua sent el nombre de nodes es una fila, pero en python el primer node es el 0 i el ultim el Nx-1 en Matlab el primer node es el 1 i l'ultim el Nx
+
 params.py
 El simroute en python3 funciona a base de moduls.
-El modul param.py es on hi ha tots els parametres, o casi tots, carregant aquest modul tenim tot el que feien amb el make_mesh en matlab, pero en aquest modul donem els valors de la simulacio, onatge, linia de costa a emptarar encara que no estiguin fets ni l'onatge ni la linia de costa.
+El modul param.py es on hi ha tots els parametres, o casi tots, carregant aquest modul tenim tot el que feien amb el make_mesh en matlab, pero en aquest modul donem a més els valors de la simulacio, onatge, linia de costa a emptarar encara que no estiguin fets ni l'onatge ni la linia de costa.
 make_waves
 Una vegada disenyat els parametres de la malla, nodes ,etc, passem a onatge.
-que com es veu importem els params.  hi hem de posar els arxius d'onatge i el nom final, hem de procurar que concideixi amb el de params. Tocant les ultimes linies treurem grafics, per veure si funciona. El onatge el gravem com arrays, acabades amb npz, al parar el nom al params ja el tindrem a punt.
+que com es veu importem els params.  hi hem de posar els arxius d'onatge i el nom final, hem de procurar que concideixi amb el de params. Tocant les ultimes linies treurem grafics, per veure si funciona. El onatge el gravem com arrays, acabades amb npz, al pasar el nom al params ja el tindrem a punt.
 
 make_lcd.py
 Aqui ja ens interesa tenir una linia de costa adaptada a la nostra malla, a in hi ha una linea de costa lcd_eu_h.dat el format son columnes de lon i lat, els talls en fan amb Nans, el nostre modul, retalla la linea de costa a la nostra malla i dona un arxiu comprimit , el nom que li posem de sortida el posarem a params
@@ -19,3 +20,6 @@ amb la segona afines el Node graficament si vols anar el node amunt sumes Nx ava
 aquestes aplicacions tambe s'utilitzen ajudats amb el grafic per trobar els 2 nodes a pratir dels quals farem nar e-w o s-n
 make_sea_ew.py
 te opció per plotejar i per gravar, el sufix es _ew.
+
+main.py
+Es el programa corre la simulació. escriu un raport.txt. Y les rutes  els escriurem en un array de nodes. El main tambe fa un grafics de les rutes optimestenint en compte el onatge  i sense
