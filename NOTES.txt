@@ -23,3 +23,4 @@ te opció per plotejar i per gravar, el sufix es _ew.
 
 main.py
 Es el programa corre la simulació. escriu un raport.txt. Y les rutes  els escriurem en un array de nodes. El main tambe fa un grafics de les rutes optimestenint en compte el onatge  i sense
+
