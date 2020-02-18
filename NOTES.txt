@@ -17,10 +17,13 @@ coords2nods.py   i  plotNodes.py
 Abans de començar la simu necesitem buscar el nodIni i el nodEnd a partir de las coordenades aproximades
 Per aixo tenim aquestes dues aplicacions la primera posant valors de la lon i la lat treus nodes propres a sota a l'esquerra i
 amb la segona afines el Node graficament si vols anar el node amunt sumes Nx avall restes Nx a la dreta sumes 1 a l'esquerra restes 1 o el numero que necesitis. Fins que estigui aceptable.
-aquestes aplicacions tambe s'utilitzen ajudats amb el grafic per trobar els 2 nodes a pratir dels quals farem nar e-w o s-n
+Aquestes utilitatss tambe s'utilitzen ajudats amb el grafic per trobar els 2 nodes a pratir dels quals farem nar e-w o s-n
 make_sea_ew.py
 te opció per plotejar i per gravar, el sufix es _ew.
 
 main.py
-Es el programa corre la simulació. escriu un raport.txt. Y les rutes  els escriurem en un array de nodes. El main tambe fa un grafics de les rutes optimestenint en compte el onatge  i sense
+Es el programa corre la simulació. escriu un raport.txt. Y les rutes  els escriurem en un array de nodes. El main tambe fa un grafics de les rutes optimes tenint en compte el onatge  i sense
+
+Per utilitzar el programa es nesesari tenir instal·lat el python3 amb els modules, numpy, matplotlib, scipy,  math, ...
+Com entorn de desenvolupament es pot  utilitzar un el wing personal, el idle, o el que us vagi millor
 
