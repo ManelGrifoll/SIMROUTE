@@ -10,26 +10,14 @@ from params import *
 gravar=1       # Si voleu fer proves sense grabar poseu 0
 N1=9251
 N2=11945
-#arx_in='in/nodes_sn.npz'
 arx_ones='in/waves_xsn.npz'
-ldct='in/ldcTrim_sn.npz'
 ###########
 # representacio
 plotejar=1        #1 es plotejar
 vari=3            # 1->hs    2->fp  3-> dir
 t=48            # hora  que caugui dins del domini
 ###############
-#dat = np.load(arx_in)
-#nodes=dat['arr_0']
-#inc=dat['arr_1']
-#Nx=dat['arr_2']
-#Ny=dat['arr_3']
-#LonMin=dat['arr_4']
-#LonMax=dat['arr_5']
-#LatMin=dat['arr_6']
-#LatMax=dat['arr_7']
-#tira_lon=dat['arr_8']
-#tira_lat=dat['arr_9']
+
 
 dat = np.load(arx_ones)
 hs=dat['arr_0']
@@ -37,8 +25,7 @@ hOld=np.copy(dir)
 fp=dat['arr_1']
 dir=dat['arr_2']
 
-dat=np.load(ldct)
-ldc=dat['arr_0']
+
 if plotejar==1: 
     if vari==1:
         old=np.copy(hs)
@@ -141,10 +128,8 @@ if plotejar==1:
         y=360
     
     
-    
-
-
-
+    dat=np.load(arx_ldc)
+    ldc=dat['arr_0']
     oo=old[:,t].reshape(sh)
     plt.figure(1)
     plt.subplot(1,2,1)

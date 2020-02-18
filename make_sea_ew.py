@@ -7,10 +7,10 @@ import sys
 import matplotlib.pyplot as plt
 from modsim import *
 from params import *
-N1=3827
-N2=4807
-#arx_in='in/nodes.npz'
-arx_ones='in/waves_xxx.npz'
+N1=4971
+N2=5447
+
+#arx_ones='in/waves_xxx.npz'
 gravar=1       # Si voleu fer proves sense grabar poseu 0
 ###########
 # representacio
@@ -18,26 +18,12 @@ plotejar=1        #1 es plotejar primer a 0 quan vulguis veure resultats a 1
 vari=3             # 1->hs    2->fp  3-> dir
 t=0             # hora  que caugui dins del domini
 ###############
-#dat = np.load(arx_in)
-#nodes=dat['arr_0']
-#inc=dat['arr_1']
-#Nx=dat['arr_2']
-#Ny=dat['arr_3']
-#LonMin=dat['arr_4']
-#LonMax=dat['arr_5']
-#LatMin=dat['arr_6']
-#LatMax=dat['arr_7']
-#tira_lon=dat['arr_8']
-#tira_lat=dat['arr_9']
 
 dat = np.load(arx_ones)
 hs=dat['arr_0']
 hOld=np.copy(dir)
 fp=dat['arr_1']
 dir=dat['arr_2']
-
-dat=np.load('in/ldcTrim.npz')
-ldc=dat['arr_0']
 if plotejar==1: 
     if vari==1:
         old=np.copy(hs)
@@ -130,10 +116,14 @@ if plotejar==1:    #la x,y son els valors limits cel colorbar
         tit='DIR'
         x=0
         y=360
-    
+    dat=np.load(arx_ldc)
+    ldc=dat['arr_0']
+    plt.figure(1)
+#plt.
+    plt.plot(ldc[:,0],ldc[:,1],'-')
 
     oo=old[:,t].reshape(sh)
-    plt.figure(1)
+    
     plt.subplot(1,2,1)
     plt.plot(ldc[:,0],ldc[:,1],'-')            
     plt.title('{}  Old temps = {}'.format(tit,t))           
