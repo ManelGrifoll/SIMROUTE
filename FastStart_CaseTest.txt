@@ -1,0 +1,19 @@
+### SIMROUTE getting started (Case test:Palma de Mallorca - Barcelona) ###
+
+Input files by default in params.py (NW Mediterrananean Sea Case test: Palma de Mallorca - Barcelona)
+i) run get_waves_CMEMS.py (optimal if not using wave files already downloaded).
+ii) run make_waves.py (waves interpolation)
+iii) run main.py (optimum and minimum distance route computation)
+iv) run PostProcesing_tools/plot_routes.py
+
+Further steps:
+i) Additional Post-procesing tools may be executed.
+ii) Additional caste tests may be executed in function of CMEMS product: 
+	params_AENWS.py (Hirtsals - Thor-shaven)  
+	params_ARTIC.py (Labrador ferry route)  
+	params_BALTIC.py (Gdansk - Stockholm)  
+	params_BLKSEA.py (Istanbul - Sevastopol)
+	params_GLOBAL.py (Boston - Plymouth) 
+	params_IBI.py (Santander - Lorient)
+	params_MEDSEA.py (Palma de Mallorca - Barcelona, benchmark test)
+	params_MEDSEA.py (Tunis - Nice) 
