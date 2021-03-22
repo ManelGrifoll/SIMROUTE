@@ -25,8 +25,8 @@ dx= 0.5
 
 #motu_path = ' /home/xarx/Downloads/motuclient-python/motuclient.py'
 motu_path = '/home/manel/MANEL_POWER/motuclient-python/motuclient.py'
-user     = ' -u mgrifoll2'
-passwd   = ' -p Estufa@1714'
+user     = ' -u user'
+passwd   = ' -p password'
 motu_web = ' --motu http://nrt.cmems-du.eu/motu-web/Motu'
 
 # END OF USER INPUTS   #######################
