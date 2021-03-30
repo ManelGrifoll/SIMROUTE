@@ -1,0 +1,19 @@
+              SIMROUTE report:     Palma_Barna
+=========================================================================
+
+Initial Velocity in knots = 16.1 
+WEN_form = 1 
+Departure:  Node =   1411  --  coordinates  (2.9000,39.2250)
+Departure time (day-month-year hour:min): 20-01-2020 9:00
+Arrival:     Node =  12781  --  coordinates  (2.7750,41.5000)
+Number of nodes: Nx=   125   Ny=   109   Nx*Ny= 13625   
+Geodetic Distance (in milles): 136.62
+ 
+========================================================================
+                                        Sailed hours    Sailed milles
+Route optimized (without waves):           9.40            151.38    
+Route optimized (with waves):             14.97            161.56    
+Route Minimum Distance with waves:        16.93            151.38    
+
+========================================================================
+
