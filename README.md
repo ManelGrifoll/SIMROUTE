@@ -19,3 +19,7 @@ E-mail: manel.grifoll@upc.edu
 Flow chart of SIMROUTE:
 
 ![Fluxe](https://user-images.githubusercontent.com/61749362/119992389-c8514380-bfca-11eb-9a13-0cc7a513f1b3.png)
+
+Test case: params_MEDSEA.py
+![Figura_total](https://user-images.githubusercontent.com/61749362/119993720-2a5e7880-bfcc-11eb-942f-5c9767178693.png)
+
