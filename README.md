@@ -9,3 +9,5 @@ on ship navigation and to highlight the relevance of ship routing in the framewo
 competences-based maritime education and training. The code has been tested using Python 3 and the specific imported modules are included in the 
 headers of the code. The repository includes the code, an additional .txt files for a fast start and the results of the benchmark case (i.e. params.py).
 Other test cases using diferent CMEMS products are also included in the repository. 
+
+Code developer: Manel Grifoll from Universitat Politècnica de Catalunya (UPC-BarcelonaTech)
