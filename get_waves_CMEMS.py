@@ -23,8 +23,8 @@ wave_prod= 2
 #Extension added at boundaries (in degrees)
 dx= 0.5
 
+motu_path = 'YOUR_PATH/motuclient-python/motuclient.py'
 #motu_path = ' /home/xarx/Downloads/motuclient-python/motuclient.py'
-motu_path = '/home/manel/MANEL_POWER/motuclient-python/motuclient.py'
 user     = ' -u mgrifoll2'
 passwd   = ' -p Estufa@1714'
 motu_web = ' --motu http://nrt.cmems-du.eu/motu-web/Motu'
