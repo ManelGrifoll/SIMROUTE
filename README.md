@@ -16,4 +16,6 @@ Code developer: Manel Grifoll from Universitat Politècnica de Catalunya (UPC-Ba
 
 E-mail: manel.grifoll@upc.edu
 
+Flow chart of SIMROUTE:
+
 ![Fluxe](https://user-images.githubusercontent.com/61749362/119992389-c8514380-bfca-11eb-9a13-0cc7a513f1b3.png)
