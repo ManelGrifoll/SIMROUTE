@@ -25,8 +25,8 @@ dx= 0.5
 
 motu_path = 'YOUR_PATH/motuclient-python/motuclient.py'
 #motu_path = ' /home/xarx/Downloads/motuclient-python/motuclient.py'
-user     = ' -u mgrifoll2'
-passwd   = ' -p Estufa@1714'
+user     = ' -u YourUser'
+passwd   = ' -p YourPassword'
 motu_web = ' --motu http://nrt.cmems-du.eu/motu-web/Motu'
 
 # END OF USER INPUTS   #######################
@@ -41,8 +41,8 @@ if wave_prod==1:
 
 if wave_prod==2:
     ### Service MEDSEA
-    CMEMS_service = ' --service-id MEDSEA_ANALYSIS_FORECAST_WAV_006_017-TDS'
-    CMEMS_product=' --product-id med00-hcmr-wav-an-fc-h '
+    CMEMS_service = ' --service-id MEDSEA_ANALYSISFORECAST_WAV_006_017-TDS'
+    CMEMS_product=' --product-id med-hcmr-wav-an-fc-h '
     varfll   = '--variable VHM0 --variable VMDR --variable VTPK'
     retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
     prod='MEDSEA_'
