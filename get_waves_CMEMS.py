@@ -12,21 +12,21 @@ import os
 import datetime
 
 #Data to donwnload wave files from CMEMS server:
-date_Ini = [2020,1,20]#[year,month,day]
-date_End = [2020,1,21] 
+date_Ini = [2020,2,5]#[year,month,day]
+date_End = [2020,2,6] 
 
 dir_waveDATA='storeWaves/'
 
 #wave product (=1  GLOBAL OCEAN; = 2 MEDSEA; = 3 IBI; = 4 AENWS; = 5 BLKSEA; = 6 BAL; = 7 ARTIC )
-wave_prod= 2
+wave_prod= 6
 
 #Extension added at boundaries (in degrees)
 dx= 0.5
 
-motu_path = 'YOUR_PATH/motuclient-python/motuclient.py'
 #motu_path = ' /home/xarx/Downloads/motuclient-python/motuclient.py'
-user     = ' -u YourUser'
-passwd   = ' -p YourPassword'
+motu_path = '/home/manel/MANEL_POWER/motuclient-python/motuclient.py'
+user     = ' -u mgrifoll2'
+passwd   = ' -p Estufa@1714'
 motu_web = ' --motu http://nrt.cmems-du.eu/motu-web/Motu'
 
 # END OF USER INPUTS   #######################

@@ -10,24 +10,25 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 #Simulation name
-name_Simu='BOS_PLY'
+name_Simu='HAKODATE_KAGOSHIMA'
 
 #Mesh boundaries
-LonMin=-70.720
-LonMax=-4.290
-LatMin=42.0
-LatMax=52.2
+LonMin=127.0
+LonMax=143.0
+LatMin=30.0
+LatMax=43.0
 
 #Grid-step in Miles
 inc=1.5    #in nautical miles   
 
 # Initial node in mesh:
-nodIni=853524
+nodIni=321587
 
 # Final node in mesh:
-nodEnd=37366
+nodEnd=25852#25850#25855
 
-ARX=['Waves_GLOBAL_20200118.nc' , 'Waves_GLOBAL_20200119.nc' , 'Waves_GLOBAL_20200120.nc' , 'Waves_GLOBAL_20200121.nc' , 'Waves_GLOBAL_20200122.nc' , 'Waves_GLOBAL_20200123.nc' , 'Waves_GLOBAL_20200124.nc' , 'Waves_GLOBAL_20200125.nc'] 
+#ARX=[ 'Waves_GLOBAL_20190804.nc' , 'Waves_GLOBAL_20190805.nc' , 'Waves_GLOBAL_20190806.nc' , 'Waves_GLOBAL_20190806.nc' , 'Waves_GLOBAL_20190807.nc' , 'Waves_GLOBAL_20190808.nc', 'Waves_GLOBAL_20190809.nc','Waves_GLOBAL_20190810.nc'] 
+ARX=['Waves_GLOBAL_20200418.nc','Waves_GLOBAL_20200419.nc','Waves_GLOBAL_20200420.nc']
 dir_arx='storeWaves/'    
 
 #Time resolution of CMEMS product:

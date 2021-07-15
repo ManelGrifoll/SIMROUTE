@@ -10,24 +10,25 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 #Simulation name
-name_Simu='SHANG_TOKIO'
+name_Simu='KAOHS_BUSAN'
 
 #Mesh boundaries
-LonMin=121.0
-LonMax=140.3
-LatMin=30.0
-LatMax=36.0
+LonMin=119.0
+LonMax=132.0
+LatMin=21.5
+LatMax=35.0
 
 #Grid-step in Miles
 inc=1.5    #in nautical miles   
 
 # Initial node in mesh:
-nodIni=15560
+nodIni=12588
 
 # Final node in mesh:
-nodEnd=161735
+nodEnd=279662
 
-ARX=['Waves_GLOBAL_20190918.nc' , 'Waves_GLOBAL_20190919.nc' , 'Waves_GLOBAL_20190920.nc' , 'Waves_GLOBAL_20190921.nc' , 'Waves_GLOBAL_20190922.nc' , 'Waves_GLOBAL_20190923.nc' , 'Waves_GLOBAL_20190924.nc' , 'Waves_GLOBAL_20190925.nc'] 
+#ARX=[ 'Waves_GLOBAL_20190804.nc' , 'Waves_GLOBAL_20190805.nc' , 'Waves_GLOBAL_20190806.nc' , 'Waves_GLOBAL_20190806.nc' , 'Waves_GLOBAL_20190807.nc' , 'Waves_GLOBAL_20190808.nc', 'Waves_GLOBAL_20190809.nc','Waves_GLOBAL_20190810.nc'] 
+ARX=['Waves_GLOBAL_20190808.nc','Waves_GLOBAL_20190809.nc','Waves_GLOBAL_20190810.nc']
 dir_arx='storeWaves/'    
 
 #Time resolution of CMEMS product:
@@ -37,7 +38,7 @@ time_res=3 # In hours: 1 for all regions except o 3 for the GLOBAL
 arx_waves= 'in/waves.npz'
 
 #Initial start time of sailing from 00:00 (from 0 to 23 hours)
-t_ini= 0
+t_ini= 4
 
 #coastline source file:
 arx_ldc= 'in/lcd_eu_h.dat'
@@ -50,7 +51,7 @@ v0=16.1  # Cruising speed in nautical milles per hour (in knots)
 
 #Formulation WEN (Wave Effect on Navigation)
     #Bowditch = 1; Aertessen = 2; Khokhlov = 3; no reduction = 4
-WEN_form=1;
+WEN_form=2;
 
 #Ship parameteres for WEN options 2 and 3. 
 Lbp = 225; # ship's length between perpendiculars (in meters)
