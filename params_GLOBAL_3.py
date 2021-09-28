@@ -22,10 +22,10 @@ LatMax=52.2
 inc=1.5    #in nautical miles   
 
 # Initial node in mesh:
-nodIni=853524
+nodIni=106388
 
 # Final node in mesh:
-nodEnd=37366
+nodEnd=853524
 
 ARX=['Waves_GLOBAL_20200118.nc' , 'Waves_GLOBAL_20200119.nc' , 'Waves_GLOBAL_20200120.nc' , 'Waves_GLOBAL_20200121.nc' , 'Waves_GLOBAL_20200122.nc' , 'Waves_GLOBAL_20200123.nc' , 'Waves_GLOBAL_20200124.nc' , 'Waves_GLOBAL_20200125.nc'] 
 dir_arx='storeWaves/'    
