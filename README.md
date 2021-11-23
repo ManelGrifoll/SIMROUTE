@@ -12,7 +12,7 @@ Other test cases using diferent CMEMS products are also included in the reposito
 
 Fast start file (and test case): FastStart_CaseTest.txt
 
-\textbf{Code developer:} Manel Grifoll from Barcelona Innovative Transportation (BIT), Universitat Politècnica de Catalunya (UPC-BarcelonaTech), manel.grifoll@upc.edu
+Code developer: Manel Grifoll from Barcelona Innovative Transportation (BIT), Universitat Politècnica de Catalunya (UPC-BarcelonaTech), manel.grifoll@upc.edu
 
 Reference: A comprehensive Ship Weather Routing system using CMEMS products and A* algorithm. Grifoll, M., Borén, C., Castells-Sanabra, M. Submitted.
 
