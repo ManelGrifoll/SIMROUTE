@@ -14,7 +14,7 @@ Fast start file (and test case): FastStart_CaseTest.txt
 
 Code developer: Manel Grifoll from Barcelona Innovative Transportation (BIT), Universitat Politècnica de Catalunya (UPC-BarcelonaTech), manel.grifoll@upc.edu
 
-Reference: A comprehensive Ship Weather Routing system using CMEMS products and A* algorithm. Grifoll, M., Borén, C., Castells-Sanabra, M. (2022). Ocean Engineering.
+Reference: A comprehensive Ship Weather Routing system using CMEMS products and A* algorithm. Grifoll, M., Borén, C., Castells-Sanabra, M. (2022). Ocean Engineering, (255) - 111427. https://doi.org/10.1016/j.oceaneng.2022.111427
 
 
 Flow chart of SIMROUTE:
