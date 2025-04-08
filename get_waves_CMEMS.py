@@ -6,119 +6,85 @@ Code part of SIMROUTE (UPC-BarcelonaTech)
 Version: 02 / 03 / 21
 @author: manel grifoll (UPC-BarcelonaTech)
 """
-
-from  params import *
+from simroute import *      #Aquest modul ja carrega el parms_PROD
 import os
 import datetime
+import copernicusmarine
 
-#Data to donwnload wave files from CMEMS server:
-date_Ini = [2020,2,5]#[year,month,day]
-date_End = [2020,2,6] 
 
-dir_waveDATA='storeWaves/'
-
-#wave product (=1  GLOBAL OCEAN; = 2 MEDSEA; = 3 IBI; = 4 AENWS; = 5 BLKSEA; = 6 BAL; = 7 ARTIC )
-wave_prod= 6
-
-#Extension added at boundaries (in degrees)
-dx= 0.5
-
-#motu_path = ' /home/xarx/Downloads/motuclient-python/motuclient.py'
-motu_path = '/home/manel/MANEL_POWER/motuclient-python/motuclient.py'
-user     = ' -u your_user'
-passwd   = ' -p your_pwd'
-motu_web = ' --motu http://nrt.cmems-du.eu/motu-web/Motu'
 
 # END OF USER INPUTS   #######################
 
-if wave_prod==1:
+if prod=='GLOBAL':
     ### GLOBAL OCEAN
-    CMEMS_service = ' --service-id GLOBAL_ANALYSIS_FORECAST_WAV_001_027-TDS'
-    CMEMS_product=' --product-id global-analysis-forecast-wav-001-027 '
+   # CMEMS_service = ' --service-id GLOBAL_ANALYSIS_FORECAST_WAV_001_027-TDS'
+   # CMEMS_product=' --product-id global-analysis-forecast-wav-001-027 '
     varfll   = '--variable VHM0 --variable VMDR --variable VTPK'
     retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
-    prod='GLOBAL_'
-
-if wave_prod==2:
+    ID_DTSET='cmems_mod_glo_wav_anfc_0.083deg_PT3H-i'
+    DT_VER="202411"
+    # a partir del   1/11/2022 03:00
+if prod=='MEDSEA':
     ### Service MEDSEA
-    CMEMS_service = ' --service-id MEDSEA_ANALYSISFORECAST_WAV_006_017-TDS'
-    CMEMS_product=' --product-id med-hcmr-wav-an-fc-h '
-    varfll   = '--variable VHM0 --variable VMDR --variable VTPK'
-    retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
-    prod='MEDSEA_'
- 
-if wave_prod==3:
+    ID_DTSET="cmems_mod_med_wav_anfc_4.2km_PT1H-i"
+    #ID_DTSET='MEDSEA_MULTIYEAR_WAV_006_012'  
+    #ID_DTSET='omi_var_extreme_wmf_medsea_area_averaged_mean'
+    DT_VER=''
+if prod=='IBI':
     ### Service IBI
-    CMEMS_service = ' --service-id IBI_ANALYSIS_FORECAST_WAV_005_005-TDS'
-    CMEMS_product=' --product-id dataset-ibi-analysis-forecast-wav-005-005-hourly '
-    varfll   = '--variable VHM0 --variable VMDR --variable VTPK'
-    retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
-    prod='IBI_'
-    
-if wave_prod==4:
+    ID_DTSET = 'cmems_mod_ibi_wav_anfc_0.027deg_PT1H-i'
+    DT_VER=''
+if prod=='AENWS':
     ### ATLANTIC - EUROPEAN NORTH WEST SHELF
-    CMEMS_service = ' --service-id	NORTHWESTSHELF_ANALYSIS_FORECAST_WAV_004_014-TDS'
-    CMEMS_product=' --product-id MetO-NWS-WAV-hi '
-    varfll   = '--variable VHM0 --variable VMDR --variable VTPK'
-    retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
-    prod='AENWS_'    
-
-if wave_prod==5:
+    ID_DTSET='MetO-NWS-WAV-RAN'
+    DT_VER=''
+if prod=='BLKSEA':
     ### BLKSEA_ANALYSIS_FORECAST_WAV_007_003
-    CMEMS_service = ' --service-id	BLKSEA_ANALYSISFORECAST_WAV_007_003-TDS'
-    CMEMS_product=' --product-id bs-hzg-wav-an-fc-h '
-    varfll   = '--variable VHM0 --variable VMDR --variable VTPK'
-    retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
-    prod='BLKSEA_'    
+    ID_DTSET='cmems_mod_blk_wav_anfc_2.5km_PT1H-i'   
+    DT_VER=''
+if prod=='BALTIC':
+    ### BALTIC SEA                                                                 
+    ID_DTSET ='cmems_mod_bal_wav_anfc_PT1H-i'
+    DT_VER=''
+# if prod=='ARTIC':    NO Existeix
+#     ### ARTIC SEA
+#      DT_VER=''
+#     ID_DTSET='ARCTIC_MULTIYEAR_WAV_002_013'
+    
+   # ID_DTSET='ARCTIC_MULTIYEAR_WAV_002_013'
 
-if wave_prod==6:
-    ### BALTIC SEA
-    CMEMS_service = ' --service-id	BALTICSEA_ANALYSISFORECAST_WAV_003_010-TDS'
-    CMEMS_product=' --product-id dataset-bal-analysis-forecast-wav-hourly '
-    varfll   = '--variable VHM0 --variable VMDR --variable VTPK'
-    retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
-    prod='BALTIC_'    
-
-if wave_prod==7:
-    ### ARTIC SEA
-    CMEMS_service = ' --service-id	ARCTIC_ANALYSIS_FORECAST_WAV_002_014-TDS'
-    CMEMS_product=' --product-id dataset-wam-arctic-1hr3km-be '
-    varfll   = '--variable VHM0 --variable VMDR --variable VTPK --variable SIC --variable SIT'
-    retall='--longitude-min ' + str(LonMin-dx)  +' --longitude-max '+ str(LonMax+dx) +' --latitude-min ' + str(LatMin-dx) + ' --latitude-max '+str(LatMax+dx)+' ' # Coordenades Limit.Cada cas especial
-    prod='ARTIC_' 
-
-###################################################
-# 	Baixa les dades
-###################################################
-###################################################
+####################
 d1 = datetime.date(date_Ini[0],date_Ini[1],date_Ini[2])
 d2 = datetime.date(date_End[0],date_End[1],date_End[2])
+nomw1=d1.strftime('%Y-%m-%d')
+dt_min= nomw1+'T00:00:00' 
+nomw2=d2.strftime('%Y-%m-%d')
+dt_max= nomw2+'T23:59:59' 
+nomarx='Waves_'+name_Simu+'_'+nomw1+'%'+nomw2+'.nc'
+print(dt_min,dt_max)
+print(nomarx)
 
-incDies=datetime.timedelta(days=1)
-files = []
-for i in range((d2-d1).days+1):
-    d=d1+incDies*i
-    datelim  = ' --date-min "'+ d.strftime('%Y-%m-%d')+' 00:00:00" --date-max "'+d.strftime('%Y-%m-%d')+' 23:00:00" '    
-    filename= dir_waveDATA+'Waves_'+prod+d.strftime('%Y%m%d')+'.nc'
-    print ('Downloading ' + filename )
-    options = motu_path+user+passwd+motu_web+CMEMS_service+ CMEMS_product+ retall +datelim + varfll +' --out-name '+filename
-    print(options)
-    os.system(options)
-    files.append(filename)
-print ('==================================================')
-stf=''
-for file in files:
-    if os.path.exists(file):
-        st='File '+file+ '   Downloaded file\n'
-    else:
-        st='File '+file+ '  No downloaded!\n'
-        stf='  With problems'
-    print(st)
+####################
 
+copernicusmarine.subset(
+        dataset_id=ID_DTSET,
+        dataset_version=DT_VER,
+        dataset_part='',
+        variables=["VHM0", "VMDR"],
+        minimum_longitude=LonMin-dx,
+        maximum_longitude=LonMax+dx,
+        minimum_latitude=LatMin-dx,
+        maximum_latitude=LatMax+dx,
+        start_datetime=dt_min,
+        end_datetime=dt_max,
+        overwrite = True,
+        coordinates_selection_method="strict-inside",
+        output_filename=nomarx ,
+        disable_progress_bar=False,
+        output_directory=dir_arx 
+        
+    )
+ 
+
+        
     
-print (' ++++++++++++++++++++++++++++++++++ ')
-print (' get_waves_CMEMS.py executed'+ stf)
-print ('+++++++++++++++++++++++++++++++++++++')
-
-
-

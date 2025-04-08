@@ -15,18 +15,17 @@ import numpy  as np
 from netCDF4 import Dataset 
 import scipy.interpolate
 import matplotlib.pyplot as plt
-from params import * 
-from func_simroute import *
+from simroute import *
 
 #Introduce [Lon, Lat] to find the node at mesh:
-P1=[2.9000,39.2250] 
+P1=[-57,54.275] 
 
 # END OF USER INPUTS   #######################
 
 # Descaarta el P1 si esta fora del domini.
 d=1
 if (P1[0]<LonMin or P1[0]>LonMax) :
-  d=0       
+  d=0     
 if (P1[1]<LatMin or P1[1]>LatMax) :
     d=0
 if d==0:
@@ -65,7 +64,7 @@ kk=hs[nnod,0]
 if np.isnan(kk):
     print('Node {} is land (not valid) \n'.format(nnod))
 else:
-    print('Node {} is sea \n'.format(nnod))
+    print('Nod      e {} is sea \n'.format(nnod))
  
 fig = plt.figure(figsize=(10,5))
 

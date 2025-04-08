@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -7,8 +8,9 @@ version 31/01/2021
 @author: manel grifoll (UPC-BarcelonaTech)
 """
 
-from  params import *
-from func_simroute import *
+#from func_simroute import *
+#from  params_IBI import *
+from simroute import *
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
@@ -163,7 +165,7 @@ for i in range(len(L_TripFix)-1):
 #dat=np.load(lcd_out)
 #ldc=dat['arr_0']
 #grabarem les sortides
-report='out/Res_'+name_Simu+'.txt'
+report='out/'+name_Simu+'_Res.txt'
 frep=open(report,'w')
 st='              SIMROUTE report:     '+name_Simu+'\n'
 frep.write(st)
@@ -179,17 +181,22 @@ frep.write(st)
 st='Departure:  Node = {:6d}  --  coordinates  ({:6.4f},{:6.4f})\n'
 frep.write(st.format(nodIni,nodes[nodIni,0],nodes[nodIni,1]))
 print(st.format(nodIni,nodes[nodIni,0],nodes[nodIni,1]))
-s=ARX[0]
-k=s.find('_',s.find('_')+1)
-Syear=s[k+1:k+5]
-Smon=s[k+5:k+7]
-Sdia=s[k+7:k+9]
+# s=ARX[0]
+# k=s.find('_',s.find('_')+1)
+# Syear=s[k+1:k+5]
+# Smon=s[k+5:k+7]
+# Sdia=s[k+7:k+9]
+Syear=str(date_Ini[0])
+Smon=str(date_Ini[1])
+Sdia=str(date_Ini[2])
 Shora=str(t_ini)
 dat=Sdia+'-'+Smon+'-'+Syear+' '+Shora+':00'
 st='Departure time (day-month-year hour:min): '+dat+'\n'
-del k , s , Syear, Sdia, Shora, Smon
+#del k , s , Syear, Sdia, Shora, Smon
 frep.write(st)
 print(st)
+
+#ARX=ferNoms(date_Ini, date_End, name_Simu)
 st='Arrival:     Node = {:6d}  --  coordinates  ({:6.4f},{:6.4f})\n'
 frep.write(st.format(nodEnd,nodes[nodEnd,0],nodes[nodEnd,1]))
 print(st.format(nodEnd,nodes[nodEnd,0],nodes[nodEnd,1]))
@@ -223,15 +230,15 @@ print ('File simulation results created: ' + report )
 
 prs = np.array([LonMin,LonMax,LatMin,LatMax,v0,inc,nodIni,nodEnd,t_ini,
                 time_res,WEN_form,Lbp,DWT])
-np.savez_compressed('out/'+name_Simu,prs,hs,fp,dir,L_Trip,L_TripFix,
-                    Cost_Opt,L_ConsCostTrip,Cost_Min,ARX)
+np.savez_compressed('out/'+name_Simu,prs,hs,dir,L_Trip,L_TripFix,
+                    Cost_Opt,L_ConsCostTrip,Cost_Min,arxW())
 ######################
 frep.write(st)
 frep.close()
 print ('File .npz results created: ' + 'out/'+name_Simu+'.npz')
 
 
-nom_reco='MetaData_'+name_Simu+'.txt'
+nom_reco=name_Simu+'_MetaData.txt'
 reco=open('out/'+nom_reco,'w')
 st='name_Simu = \''+name_Simu+'\'\n'
 reco.write(st)
@@ -249,11 +256,8 @@ st='nodIni = {:d} \n'
 reco.write(st.format(nodIni))
 st='nodEnd = {:d} \n'
 reco.write(st.format(nodEnd))
-reco.write('ARX = [')
-for a in ARX:
-    reco.write('\''+str(a)+'\' , ')
-reco.write(' ] \n')
-reco.write('dir_arx = \'storeWaves/\'\n')
+reco.write(arxW()+'\n')
+#reco.write('dir_arx = \'storeWaves/\'\n')
 st='time_res = {:d} \n'
 reco.write(st.format(time_res))
 st='t_ini = {:d} \n'
@@ -269,7 +273,7 @@ reco.write(st.format(int(DWT)))
 reco.close()
 print ('File simulation metadata created: ' + nom_reco)
 
-report='out/Route_'+name_Simu+'.txt'
+report='out/'+name_Simu+'_Route.txt'
 frout=open(report,'w')
 st='  nnod     Lon    Lat      Cost    hs      dir   \n'
 frout.write(st)
@@ -328,9 +332,11 @@ if plot_routes==1:
     for j in range(Ny):
         for i in range(Nx):
               hs_rec[j,i]=hs[:,t][i+Nx*j]
-              dir_rec[j,i]=dir[:,t][i+Nx*j]
+           #   dir_rec[j,i]=dir[:,t][i+Nx*j]
+    print('Faig un gràfic puc trigar una bona estona si la malla es gran\n pots posar la variable plot_routes a 0 en el params')
     plt.pcolor(Xnod,Ynod,hs_rec)
     vmax=np.nanmax(hs)
     plt.clim(0,vmax)
     plt.colorbar()
     plt.show()
+print('End main.py')
