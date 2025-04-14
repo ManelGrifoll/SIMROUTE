@@ -3,7 +3,7 @@
 Input files by default in params.py (NW Mediterrananean Sea Case test: Palma de Mallorca - Barcelona)
 i) run get_waves_CMEMS.py (if not using wave files already downloaded).
 To run this code include your motu address and usr + pwd from CMEMS web page.
-Motu-client info: https://help-cmems.mercator-ocean.fr/en/articles/4796533-what-are-the-motu-client-motuclient-and-python-requirements
+Motu-client info: https://help.marine.copernicus.eu/en/articles/4796533-what-are-the-motu-client-motuclient-and-python-requirements
 ii) run make_waves.py (waves interpolation)
 iii) run main.py (optimum and minimum distance route computation)
 iv) run PostProcesing_tools/plot_routes.py
